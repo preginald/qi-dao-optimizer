@@ -46,20 +46,20 @@ class Vault:
         self.debt = self.get_debt()
 
         if vault.name() == "camWMATIC MAI Vault":
-            self.max_debt_ratio = 180
-            self.min_debt_ratio = 190
+            self.max_debt_ratio = 160
+            self.min_debt_ratio = 170
             self.precision = 10 ** 18
             contract_address = MATIC_CONTRACT_ADDRESS
 
         if vault.name() == "camWETH MAI Vault":
-            self.max_debt_ratio = 180
-            self.min_debt_ratio = 190
+            self.max_debt_ratio = 160
+            self.min_debt_ratio = 170
             self.precision = 10 ** 18
             contract_address = ETH_CONTRACT_ADDRESS
 
         if vault.name() == "camWBTC MAI Vault":
-            self.max_debt_ratio = 155
-            self.min_debt_ratio = 165
+            self.max_debt_ratio = 145
+            self.min_debt_ratio = 155
             self.precision = 10 ** 8
             contract_address = BTC_CONTRACT_ADDRESS
 
