@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 from brownie import (
-    PriceFeedConsumer,
     accounts,
     config,
     interface,
