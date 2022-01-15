@@ -1,0 +1,4 @@
+eth-brownie
+python-dotenv
+pymongo
+black
