@@ -9,16 +9,16 @@ from brownie import (
 )
 import time, os
 
-camWMATIC_CONTRACT = "0x88d84a85A87ED12B8f098e8953B322fF789fCD1a"
-camWBTC_CONTRACT = "0x7dda5e1a389e0c1892caf55940f5fce6588a9ae0"
-camWETH_CONTRACT = "0x11a33631a5b5349af3f165d2b7901a4d67e561ad"
-MATIC_CONTRACT_ADDRESS = "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0"
-BTC_CONTRACT_ADDRESS = "0xc907E116054Ad103354f2D350FD2514433D57F6f"
-ETH_CONTRACT_ADDRESS = "0xF9680D99D6C9589e2a93a78A04A279e509205945"
+camWMATIC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWMATIC"]
+camWBTC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWBTC"]
+camWETH_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWETH"]
+MATIC_CONTRACT_ADDRESS = config["networks"][network.show_active()][
+    "matic_usd_price_feed"
+]
+BTC_CONTRACT_ADDRESS = config["networks"][network.show_active()]["btc_usd_price_feed"]
+ETH_CONTRACT_ADDRESS = config["networks"][network.show_active()]["eth_usd_price_feed"]
 
-# ACC_ID = "test1"
-
-ACC_ID = "alpha"
+ACC_ID = config["wallets"]["from_id"]
 
 
 def get_account(_filename):
@@ -45,23 +45,18 @@ class Vault:
 
         self.debt = self.get_debt()
 
-        if vault.name() == "camWMATIC MAI Vault":
-            self.max_debt_ratio = 160
-            self.min_debt_ratio = 170
-            self.precision = 10 ** 18
-            contract_address = MATIC_CONTRACT_ADDRESS
-
-        if vault.name() == "camWETH MAI Vault":
-            self.max_debt_ratio = 160
-            self.min_debt_ratio = 170
-            self.precision = 10 ** 18
-            contract_address = ETH_CONTRACT_ADDRESS
-
-        if vault.name() == "camWBTC MAI Vault":
-            self.max_debt_ratio = 145
-            self.min_debt_ratio = 155
-            self.precision = 10 ** 8
-            contract_address = BTC_CONTRACT_ADDRESS
+        self.max_debt_ratio = config["networks"][network.show_active()][vault.name()][
+            "max_debt_ratio"
+        ]
+        self.min_debt_ratio = config["networks"][network.show_active()][vault.name()][
+            "min_debt_ratio"
+        ]
+        self.precision = (
+            10 ** config["networks"][network.show_active()][vault.name()]["precision"]
+        )
+        contract_address = config["networks"][network.show_active()][vault.name()][
+            "price_feed"
+        ]
 
         self.collateral_price = get_token_price(contract_address)
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
@@ -120,8 +115,7 @@ class Vault:
 
 def camWMATIC():
     vault_contract = interface.MaiVault(camWMATIC_CONTRACT)
-    # vault_contract = Contract.from_explorer(camWMATIC_CONTRACT)
-    vault_id = 2032  # alpha
+    vault_id = config["networks"][network.show_active()]["camWMATIC MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
@@ -136,8 +130,7 @@ def camWMATIC():
 
 def camWETH():
     vault_contract = interface.MaiVault(camWETH_CONTRACT)
-    # vault_contract = Contract.from_explorer(camWMATIC_CONTRACT)
-    vault_id = 1227  # alpha
+    vault_id = config["networks"][network.show_active()]["camWETH MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
@@ -152,8 +145,7 @@ def camWETH():
 
 def camWBTC():
     vault_contract = interface.MaiVault(camWBTC_CONTRACT)
-    # vault_contract = Contract.from_explorer(camWBTC_CONTRACT)
-    vault_id = 506
+    vault_id = config["networks"][network.show_active()]["camWBTC MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
