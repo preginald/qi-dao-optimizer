@@ -7,7 +7,7 @@ from brownie import (
     Contract,
     Wei,
 )
-import time, os
+import requests, json, time, os
 
 camWMATIC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWMATIC"]
 camWBTC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWBTC"]
@@ -31,11 +31,17 @@ def get_account(_filename):
 
 def get_token_price(contract_address):
     contract = interface.ChainlinkPriceFeed(contract_address)
-    # contract = Contract.from_explorer(contract_address)
     decimals = 10 ** contract.decimals()
     price = contract.latestAnswer() / decimals
     # print(f"Price: ${price}")
     return price
+
+
+def get_price_debank(chain_id, id):
+    url = "https://openapi.debank.com/v1/token"
+    params = {"chain_id": chain_id, "id": id}
+    response = requests.get(url, params)
+    return json.loads(response.content)["price"]
 
 
 class Vault:
@@ -58,7 +64,7 @@ class Vault:
             "price_feed"
         ]
 
-        self.collateral_price = get_token_price(contract_address)
+        self.collateral_price = get_price_debank("matic", contract_address)
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
         self.collateral_value = self.collateral * self.collateral_price
 
@@ -87,8 +93,9 @@ class Vault:
 
     def borrow(self):
         acc = get_account(ACC_ID)
-        amount = Wei(f"{self.borrow_amount} ether")
-        print(f"You are about to borrow {amount}")
+        amount = self.borrow_amount
+        amount_wei = Wei(f"{amount} ether")
+        print(f"You are about to borrow {self.borrow_amount} ({amount_wei})")
         tx = self.vault.borrowToken(self.vault_id, amount, {"from": acc})
         tx.wait(5)
         return tx
@@ -96,9 +103,9 @@ class Vault:
     def repay(self):
         acc = get_account(ACC_ID)
         amount = self.max_borrow - self.debt
-        amount = Wei(f"{abs(amount)} ether")
-        print(f"You are about to repay {amount}")
-        tx = self.vault.payBackToken(self.vault_id, amount, {"from": acc})
+        amount_wei = Wei(f"{abs(amount)} ether")
+        print(f"You are about to repay {amount} ({amount_wei})")
+        tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": acc})
         tx.wait(5)
         return tx
 
@@ -163,9 +170,9 @@ def main():
         camWMATIC()
         print("")
         time.sleep(5)
-        camWETH()
-        print("")
-        time.sleep(5)
-        camWBTC()
-        print("")
-        time.sleep(5)
+        # camWETH()
+        # print("")
+        # time.sleep(5)
+        # camWBTC()
+        # print("")
+        # time.sleep(5)
