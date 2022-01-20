@@ -85,7 +85,12 @@ class Vault:
 
     def borrow(self):
         acc = get_account(ACC_ID)
-        amount = self.borrow_amount
+
+        if self.mai_reserves < self.borrow_amount:
+            amount = self.mai_reserves - 1
+        else:
+            amount = self.borrow_amount
+
         amount_wei = Wei(f"{amount} ether")
         print(f"You are about to borrow {amount} ({amount_wei})")
         tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": acc})
