@@ -32,7 +32,7 @@ brownie --version
 brownie networks add Polygon "polygon-main-chainstack" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Chainstack)" explorer=https://api.polygonscan.com/api
 ```
 
-### Check if rpy was added
+### Check if rpc was added
 
 ```bash
 brownie console --network polygon-main-chainstack
