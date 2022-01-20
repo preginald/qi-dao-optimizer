@@ -29,14 +29,6 @@ def get_account(_filename):
     return account
 
 
-def get_token_price(contract_address):
-    contract = interface.ChainlinkPriceFeed(contract_address)
-    decimals = 10 ** contract.decimals()
-    price = contract.latestAnswer() / decimals
-    # print(f"Price: ${price}")
-    return price
-
-
 def get_price_debank(chain_id, id):
     url = "https://openapi.debank.com/v1/token"
     params = {"chain_id": chain_id, "id": id}
