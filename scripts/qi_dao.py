@@ -87,8 +87,8 @@ class Vault:
         acc = get_account(ACC_ID)
         amount = self.borrow_amount
         amount_wei = Wei(f"{amount} ether")
-        print(f"You are about to borrow {self.borrow_amount} ({amount_wei})")
-        tx = self.vault.borrowToken(self.vault_id, amount, {"from": acc})
+        print(f"You are about to borrow {amount} ({amount_wei})")
+        tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": acc})
         tx.wait(5)
         return tx
 
