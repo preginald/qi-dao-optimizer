@@ -167,7 +167,8 @@ def camWBTC():
 
 
 def main():
-    vault_asset = input("Enter asset: cwm = camWMATIC, cwe = camWETH, cwb = camWBTC")
+    print("Asset codes: cwm = camWMATIC, cwe = camWETH, cwb = camWBTC")
+    vault_asset = input("Enter asset: ")
     while True:
         if vault_asset == "cwm":
             camWMATIC()
