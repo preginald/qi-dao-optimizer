@@ -3,3 +3,4 @@ pymongo
 cytoolz==0.11.2
 eth-brownie
 black
+pylint
