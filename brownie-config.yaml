@@ -91,13 +91,13 @@ networks:
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: "0x7068ea5255cb05931efa8026bd04b18f3deb8b0b"
+      price_feed: "0x8df3aad3a84da6b69a4da8aec3ea40d9091b2ac4"
     camWETH MAI Vault: 
       id: 1227
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: '0x0470cd31c8fcc42671465880ba81d631f0b76c1d'
+      price_feed: '0x28424507fefb6f7f8E9D3860F56504E4e5f5f390'
     camWBTC MAI Vault: 
       id: 506
       max_debt_ratio: 160
