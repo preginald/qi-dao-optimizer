@@ -76,11 +76,15 @@ class Vault:
         else:
             amount = self.borrow_amount
 
-        amount_wei = Wei(f"{amount} ether")
-        print(f"You are about to borrow {amount} ({amount_wei})")
-        tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": acc})
-        tx.wait(5)
-        return tx
+        if amount < 1:
+            print(f"You need to borrow more than 1 miMATIC {amount}!")
+            return
+        else:
+            amount_wei = Wei(f"{amount} ether")
+            print(f"You are about to borrow {amount} ({amount_wei})")
+            tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": acc})
+            tx.wait(5)
+            return tx
 
     def repay(self):
         acc = get_account(ACC_ID)
