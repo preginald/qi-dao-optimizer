@@ -21,21 +21,6 @@ ETH_CONTRACT_ADDRESS = config["networks"][network.show_active()]["eth_usd_price_
 ACC_ID = config["wallets"]["from_id"]
 
 
-def get_account(_filename):
-    account = accounts.load(_filename, os.environ["p1"])
-    account_balance = account.balance() / 10 ** 18
-    print("Account loaded")
-    print("Balance:", account_balance)
-    return account
-
-
-def get_price_debank(chain_id, id):
-    url = "https://openapi.debank.com/v1/token"
-    params = {"chain_id": chain_id, "id": id}
-    response = requests.get(url, params)
-    return json.loads(response.content)["price"]
-
-
 class Vault:
     def __init__(self, vault, vault_id):
         self.vault = vault
@@ -117,6 +102,21 @@ class Vault:
         return debt
 
 
+def get_account(_filename):
+    account = accounts.load(_filename, os.environ["p1"])
+    account_balance = account.balance() / 10 ** 18
+    print("Account loaded")
+    print("Balance:", account_balance)
+    return account
+
+
+def get_price_debank(chain_id, id):
+    url = "https://openapi.debank.com/v1/token"
+    params = {"chain_id": chain_id, "id": id}
+    response = requests.get(url, params)
+    return json.loads(response.content)["price"]
+
+
 def camWMATIC():
     vault_contract = interface.MaiVault(camWMATIC_CONTRACT)
     vault_id = config["networks"][network.show_active()]["camWMATIC MAI Vault"]["id"]
@@ -163,15 +163,13 @@ def camWBTC():
 
 
 def main():
-    vault_asset = input("Enter vault asset")
-    print(vault_asset)
-    # while True:
-    #     camWMATIC()
-    #     print("")
-    #     time.sleep(5)
-    #     camWETH()
-    #     print("")
-    #     time.sleep(5)
-    #     camWBTC()
-    #     print("")
-    #     time.sleep(5)
+    vault_asset = input("Enter asset: cwm = camWMATIC, cwe = camWETH, cwb = camWBTC")
+    while True:
+        if vault_asset == "cwm":
+            camWMATIC()
+        if vault_asset == "cwe":
+            camWETH()
+        if vault_asset == "cwb":
+            camWBTC()
+        print("")
+        time.sleep(5)
