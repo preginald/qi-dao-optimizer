@@ -91,19 +91,19 @@ networks:
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: "0x8df3aad3a84da6b69a4da8aec3ea40d9091b2ac4"
+      price_feed: "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0"
     camWETH MAI Vault: 
       id: 1227
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: '0x28424507fefb6f7f8E9D3860F56504E4e5f5f390'
+      price_feed: '0xF9680D99D6C9589e2a93a78A04A279e509205945'
     camWBTC MAI Vault: 
       id: 506
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 8
-      price_feed: "0xba6273a78a23169e01317bd0f6338547f869e8df"
+      price_feed: "0xc907E116054Ad103354f2D350FD2514433D57F6f"
 wallets:
   from_key: ${PRIVATE_KEY}
   from_mnemonic: ${MNEMONIC}

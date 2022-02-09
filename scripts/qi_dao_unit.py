@@ -41,7 +41,7 @@ class Vault:
             "price_feed"
         ]
 
-        self.collateral_price = get_price_debank("matic", contract_address)
+        self.collateral_price = get_price_chainlink(contract_address)
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
         self.collateral_value = self.collateral * self.collateral_price
 
@@ -112,6 +112,15 @@ def get_account(_filename):
     print("Account loaded")
     print("Balance:", account_balance)
     return account
+
+
+def get_price_chainlink(contract_address):
+    contract = interface.ChainlinkPriceFeed(contract_address)
+    # contract = Contract.from_explorer(contract_address)
+    decimals = 10 ** contract.decimals()
+    price = contract.latestAnswer() / decimals
+    # print(f"Price: ${price}")
+    return price
 
 
 def get_price_debank(chain_id, id):
