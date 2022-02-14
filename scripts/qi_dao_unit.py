@@ -89,10 +89,14 @@ class Vault:
     def repay(self):
         acc = get_account(ACC_ID)
         amount = self.max_borrow - self.debt
-        amount_wei = Wei(f"{abs(amount)} ether")
-        print(f"You are about to repay {amount} ({amount_wei})")
-        tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": acc})
-        tx.wait(5)
+        if amount > 10:
+            amount_wei = Wei(f"{abs(amount)} ether")
+            print(f"You are about to repay {amount} ({amount_wei})")
+            tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": acc})
+            tx.wait(5)
+        else:
+            print(f"Skipping repay {amount} because amount is less than 10.")
+            tx = False
         return tx
 
     def get_debt_ceiling(self):
