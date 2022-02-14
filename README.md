@@ -2,7 +2,10 @@
 
 ## Prequisites
 
+* python 3.9
+* eth-brownie 1.17.2
 * python3-env
+
 
 ## Steps to install
 
