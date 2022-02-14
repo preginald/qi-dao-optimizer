@@ -1,6 +1,5 @@
 python-dotenv
 pymongo
-cytoolz==0.11.2
-eth-brownie
+eth-brownie==1.17.2
 black
 pylint
