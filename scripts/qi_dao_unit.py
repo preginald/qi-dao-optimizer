@@ -8,6 +8,7 @@ from brownie import (
     Wei,
 )
 import requests, json, time, os
+from web3 import Web3
 
 camWMATIC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWMATIC"]
 camWBTC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWBTC"]
@@ -90,7 +91,7 @@ class Vault:
         acc = get_account(ACC_ID)
         amount = self.max_borrow - self.debt
         if amount > 10:
-            amount_wei = Wei(f"{abs(amount)} ether")
+            amount_wei = Web3.toWei(amount, "ether")
             print(f"You are about to repay {amount} ({amount_wei})")
             tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": acc})
             tx.wait(5)
