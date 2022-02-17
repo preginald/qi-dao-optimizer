@@ -89,7 +89,7 @@ class Vault:
 
     def repay(self):
         acc = get_account(ACC_ID)
-        amount = self.max_borrow - self.debt
+        amount = self.debt - self.max_borrow
         if amount > 10:
             amount_wei = Web3.toWei(amount, "ether")
             print(f"You are about to repay {amount} ({amount_wei})")
