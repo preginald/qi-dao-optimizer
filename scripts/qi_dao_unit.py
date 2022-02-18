@@ -135,9 +135,9 @@ def get_price_debank(chain_id, id):
     return json.loads(response.content)["price"]
 
 
-def camWMATIC():
+def camWMATIC(vault_id):
     vault_contract = interface.MaiVault(camWMATIC_CONTRACT)
-    vault_id = config["networks"][network.show_active()]["camWMATIC MAI Vault"]["id"]
+    # vault_id = config["networks"][network.show_active()]["camWMATIC MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
@@ -150,9 +150,9 @@ def camWMATIC():
             tx = vault.borrow()
 
 
-def camWETH():
+def camWETH(vault_id):
     vault_contract = interface.MaiVault(camWETH_CONTRACT)
-    vault_id = config["networks"][network.show_active()]["camWETH MAI Vault"]["id"]
+    # vault_id = config["networks"][network.show_active()]["camWETH MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
@@ -165,9 +165,9 @@ def camWETH():
             tx = vault.borrow()
 
 
-def camWBTC():
+def camWBTC(vault_id):
     vault_contract = interface.MaiVault(camWBTC_CONTRACT)
-    vault_id = config["networks"][network.show_active()]["camWBTC MAI Vault"]["id"]
+    # vault_id = config["networks"][network.show_active()]["camWBTC MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
