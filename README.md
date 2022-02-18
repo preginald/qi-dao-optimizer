@@ -41,3 +41,17 @@ brownie networks add Polygon "polygon-main-chainstack" host=https://<replace-wit
 brownie console --network polygon-main-chainstack
 ```
 
+### How to run the
+
+```bash
+./qi.sh VAULT ID
+```
+where 
+VAULT = cwm for camWMATIC, cwe for camWETH
+ID = vault ID
+
+eg. To run the bot on the camWMATIC vault with id 1337
+
+```bash
+./qi.sh cwm 1337
+```
