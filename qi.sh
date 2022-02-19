@@ -23,4 +23,5 @@ while :
 do
     brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-chainstack
     echo 
+    sleep 5s
 done
