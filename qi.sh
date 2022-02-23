@@ -34,7 +34,9 @@ function=${functions[$vault_asset]}
 
 while :
 do
-    # brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-chainstack
+    echo
+    echo Running $function on $network_id
+    echo
     brownie run scripts/qi_dao_unit.py $function $vault_id --network $network_id
     echo 
     sleep 5s
