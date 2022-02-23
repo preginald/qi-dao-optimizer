@@ -39,5 +39,6 @@ do
     echo
     brownie run scripts/qi_dao_unit.py $function $vault_id --network $network_id
     echo 
+    echo Waiting 5 seconds
     sleep 5s
 done
