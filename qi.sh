@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [[ -z "${p1}" ]]; then
+    echo -n "Enter p1: "
+    read p1
+    export p1=$p1
+fi
+
 if [[ "$1" =~ ^(cwb|cwe|cwm)$ ]]; then
     vault_asset=$1
 else
@@ -9,7 +15,7 @@ else
 fi
 
 if [ -z "$2" ]; then
-    echo "Enter the $function vault ID"
+    echo -n "Enter the $function vault ID: "
     read vault_id
 else
     vault_id=$2
@@ -21,7 +27,8 @@ function=${functions[$vault_asset]}
 
 while :
 do
-    brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-chainstack
+    # brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-chainstack
+    brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-alchemy
     echo 
     sleep 5s
 done
