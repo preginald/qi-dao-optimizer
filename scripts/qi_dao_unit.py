@@ -10,14 +10,20 @@ from brownie import (
 import requests, json, time, os
 from web3 import Web3
 
-camWMATIC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWMATIC"]
-camWBTC_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWBTC"]
-camWETH_CONTRACT = config["networks"][network.show_active()]["tokens"]["camWETH"]
-MATIC_CONTRACT_ADDRESS = config["networks"][network.show_active()][
-    "matic_usd_price_feed"
-]
-BTC_CONTRACT_ADDRESS = config["networks"][network.show_active()]["btc_usd_price_feed"]
-ETH_CONTRACT_ADDRESS = config["networks"][network.show_active()]["eth_usd_price_feed"]
+
+def get_network(network_id):
+    network_array = network_id.split("-")
+    return network_array[0] + "-" + network_array[1]
+
+
+network_id = get_network(network.show_active())
+
+camWMATIC_CONTRACT = config["networks"][network_id]["tokens"]["camWMATIC"]
+camWBTC_CONTRACT = config["networks"][network_id]["tokens"]["camWBTC"]
+camWETH_CONTRACT = config["networks"][network_id]["tokens"]["camWETH"]
+MATIC_CONTRACT_ADDRESS = config["networks"][network_id]["matic_usd_price_feed"]
+BTC_CONTRACT_ADDRESS = config["networks"][network_id]["btc_usd_price_feed"]
+ETH_CONTRACT_ADDRESS = config["networks"][network_id]["eth_usd_price_feed"]
 
 ACC_ID = config["wallets"]["from_id"]
 
@@ -29,18 +35,14 @@ class Vault:
 
         self.debt = self.get_debt()
 
-        self.max_debt_ratio = config["networks"][network.show_active()][vault.name()][
+        self.max_debt_ratio = config["networks"][network_id][vault.name()][
             "max_debt_ratio"
         ]
-        self.min_debt_ratio = config["networks"][network.show_active()][vault.name()][
+        self.min_debt_ratio = config["networks"][network_id][vault.name()][
             "min_debt_ratio"
         ]
-        self.precision = (
-            10 ** config["networks"][network.show_active()][vault.name()]["precision"]
-        )
-        contract_address = config["networks"][network.show_active()][vault.name()][
-            "price_feed"
-        ]
+        self.precision = 10 ** config["networks"][network_id][vault.name()]["precision"]
+        contract_address = config["networks"][network_id][vault.name()]["price_feed"]
 
         self.collateral_price = get_price_chainlink(contract_address)
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
