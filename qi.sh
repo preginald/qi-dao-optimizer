@@ -34,11 +34,16 @@ function=${functions[$vault_asset]}
 
 while :
 do
+    counter=5
     echo
     echo Running $function on $network_id
     echo
     brownie run scripts/qi_dao_unit.py $function $vault_id --network $network_id
     echo 
-    echo Waiting 5 seconds
-    sleep 5s
+    while [ $counter -gt -1 ]
+    do
+        echo Waiting $counter seconds
+        counter=$(( $counter - 1 ))
+        sleep 1
+    done
 done
