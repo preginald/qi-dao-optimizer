@@ -21,6 +21,13 @@ else
     vault_id=$2
 fi
 
+if [ -z "$3" ]; then
+    echo -n "Enter the network ID: "
+    read network_id
+else
+    network_id=$3
+fi
+
 declare -A functions=( ["cwm"]="camWMATIC" ["cwe"]="camWETH")
 
 function=${functions[$vault_asset]}
@@ -28,7 +35,7 @@ function=${functions[$vault_asset]}
 while :
 do
     # brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-chainstack
-    brownie run scripts/qi_dao_unit.py $function $vault_id --network polygon-main-alchemy
+    brownie run scripts/qi_dao_unit.py $function $vault_id --network $network_id
     echo 
     sleep 5s
 done
