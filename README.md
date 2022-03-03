@@ -5,6 +5,7 @@
 * python 3.9
 * eth-brownie 1.17.2
 * python3-env
+* python3-dev 
 
 
 ## Steps to install
