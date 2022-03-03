@@ -6,6 +6,12 @@ if [[ -z "${p1}" ]]; then
     export p1=$p1
 fi
 
+if [[ -z "${POLYGONSCAN_TOKEN}" ]]; then
+    echo -n "Enter Polygonscan API token: "
+    read api_token 
+    export POLYGONSCAN_TOKEN=$api_token
+fi
+
 if [[ "$1" =~ ^(cwb|cwe|cwm)$ ]]; then
     vault_asset=$1
 else
