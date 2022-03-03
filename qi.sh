@@ -2,14 +2,16 @@
 
 if [[ -z "${p1}" ]]; then
     echo -n "Enter p1: "
-    read p1
+    read -s p1
     export p1=$p1
+    echo ""
 fi
 
 if [[ -z "${POLYGONSCAN_TOKEN}" ]]; then
     echo -n "Enter Polygonscan API token: "
-    read api_token 
+    read -s api_token 
     export POLYGONSCAN_TOKEN=$api_token
+    echo ""
 fi
 
 if [[ "$1" =~ ^(cwb|cwe|cwm)$ ]]; then
