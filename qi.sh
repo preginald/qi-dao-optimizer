@@ -53,7 +53,7 @@ do
     echo
     echo Running $function on $network_id
     echo
-    brownie run scripts/qi_dao_unit.py $function $acc_id $vault_id --network $network_id
+    brownie run scripts/qi_dao.py $function $acc_id $vault_id --network $network_id
     echo 
     while [ $counter -gt -1 ]
     do
