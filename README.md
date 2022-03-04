@@ -51,6 +51,11 @@ brownie console --network polygon-main-alchemy
 brownie console --network polygon-main-chainstack
 ```
 
+### Add Brownie Account credentials
+
+```bash
+brownie accounts new <account_id>
+```
 ### How to run the
 
 ```bash
