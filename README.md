@@ -51,22 +51,25 @@ brownie console --network polygon-main-alchemy
 brownie console --network polygon-main-chainstack
 ```
 
-### Add Brownie Account credentials
+### Add Brownie account credentials
 
 ```bash
 brownie accounts new <account_id>
 ```
-### How to run the
+### How to run the bot
 
 ```bash
-./qi.sh VAULT ID
+./qi.sh <account_id> <vault> <id> <network>
 ```
-where 
-VAULT = cwm for camWMATIC, cwe for camWETH
-ID = vault ID
 
-eg. To run the bot on the camWMATIC vault with id 1337
+where 
+<account_id> = brownie account id specified when adding Brownie Account credentials
+<vault> = cwm for camWMATIC, cwe for camWETH
+<id> = vault ID
+<network> = brownie network id specified when adding a custom RPC
+
+eg. To run the bot on the camWMATIC vault with id 1337 on the Alchemy Polygon RPC using the accound id of "alpha"
 
 ```bash
-./qi.sh cwm 1337
+./qi.sh alpha cwm 1337 polygon-main-alchemy
 ```
