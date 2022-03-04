@@ -10,7 +10,7 @@
 
 ## Steps to install
 
-### Install python virtual environent
+### Install Python virtual environent
 
 ```bash 
 python -m venv .venv
@@ -26,22 +26,26 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Check if brownie is installed
+### Check if Brownie is installed
 ```bash
 brownie --version
 ```
 
-### Add alchemy rpc for polygon
+### Add Alchemy RPC for Polygon
 ```bash
 brownie networks add Polygon "polygon-main-alchemy" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Alchemy)" explorer=https://api.polygonscan.com/api
 ```
 
-### Add chainstack rpc for polygon
+### Add Chainstack RPC for Polygon
 ```bash
 brownie networks add Polygon "polygon-main-chainstack" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Chainstack)" explorer=https://api.polygonscan.com/api
 ```
 
-### Check if rpc was added
+### Check if RPC was added
+
+```bash
+brownie console --network polygon-main-alchemy
+```
 
 ```bash
 brownie console --network polygon-main-chainstack
