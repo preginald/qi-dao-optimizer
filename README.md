@@ -62,11 +62,12 @@ brownie accounts new <account_id>
 ./qi.sh <account_id> <vault> <id> <network>
 ```
 
-where 
-<account_id> = brownie account id specified when adding Brownie Account credentials
-<vault> = cwm for camWMATIC, cwe for camWETH
-<id> = vault ID
-<network> = brownie network id specified when adding a custom RPC
+where...
+
+* **account_id** is the brownie account id specified when adding Brownie Account credentials
+* **vault** is the collateral token code, cwm for camWMATIC, cwe for camWETH
+* **id** is vault ID
+* **network** is the brownie network id specified when adding a custom RPC
 
 eg. To run the bot on the camWMATIC vault with id 1337 on the Alchemy Polygon RPC using the accound id of "alpha"
 
