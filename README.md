@@ -31,6 +31,11 @@ pip install -r requirements.txt
 brownie --version
 ```
 
+### Add alchemy rpc for polygon
+```bash
+brownie networks add Polygon "polygon-main-alchemy" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Alchemy)" explorer=https://api.polygonscan.com/api
+```
+
 ### Add chainstack rpc for polygon
 ```bash
 brownie networks add Polygon "polygon-main-chainstack" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Chainstack)" explorer=https://api.polygonscan.com/api
