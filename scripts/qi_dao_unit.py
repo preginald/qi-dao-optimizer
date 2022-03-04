@@ -25,12 +25,11 @@ MATIC_CONTRACT_ADDRESS = config["networks"][network_id]["matic_usd_price_feed"]
 BTC_CONTRACT_ADDRESS = config["networks"][network_id]["btc_usd_price_feed"]
 ETH_CONTRACT_ADDRESS = config["networks"][network_id]["eth_usd_price_feed"]
 
-ACC_ID = config["wallets"]["from_id"]
-
 
 class Vault:
-    def __init__(self, vault, vault_id):
+    def __init__(self, vault, acc_id, vault_id):
         self.vault = vault
+        self.acc_id = acc_id
         self.vault_id = vault_id
 
         self.debt = self.get_debt()
@@ -72,7 +71,7 @@ class Vault:
         print(f"Min debt ratio: {self.min_debt_ratio}")
 
     def borrow(self):
-        acc = get_account(ACC_ID)
+        acc = get_account(self.acc_id)
 
         if self.mai_reserves < self.borrow_amount:
             amount = self.mai_reserves - 1
@@ -90,7 +89,7 @@ class Vault:
             return tx
 
     def repay(self):
-        acc = get_account(ACC_ID)
+        acc = get_account(self.acc_id)
         amount = self.debt - self.max_borrow
         if amount > 10:
             amount_wei = Web3.toWei(amount, "ether")
@@ -137,10 +136,10 @@ def get_price_debank(chain_id, id):
     return json.loads(response.content)["price"]
 
 
-def camWMATIC(vault_id):
+def camWMATIC(acc_id, vault_id):
     vault_contract = interface.MaiVault(camWMATIC_CONTRACT)
     # vault_id = config["networks"][network.show_active()]["camWMATIC MAI Vault"]["id"]
-    vault = Vault(vault_contract, vault_id)
+    vault = Vault(vault_contract, acc_id, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
         tx = vault.repay()

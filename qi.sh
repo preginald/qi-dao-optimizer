@@ -14,26 +14,33 @@ if [[ -z "${POLYGONSCAN_TOKEN}" ]]; then
     echo ""
 fi
 
-if [[ "$1" =~ ^(cwb|cwe|cwm)$ ]]; then
-    vault_asset=$1
+if [ -z "$1" ]; then
+    echo -n "Enter the Brownie Account ID: "
+    read acc_id
+else
+    acc_id=$1
+fi
+
+if [[ "$2" =~ ^(cwb|cwe|cwm)$ ]]; then
+    vault_asset=$2
 else
     echo "Select which vault"
     echo -n "cwm = camWMATIC, cwe = camWETH, cwb = camWBTC: "
     read vault_asset
 fi
 
-if [ -z "$2" ]; then
+if [ -z "$3" ]; then
     echo -n "Enter the $function vault ID: "
     read vault_id
 else
-    vault_id=$2
+    vault_id=$3
 fi
 
-if [ -z "$3" ]; then
+if [ -z "$4" ]; then
     echo -n "Enter the network ID: "
     read network_id
 else
-    network_id=$3
+    network_id=$4
 fi
 
 declare -A functions=( ["cwm"]="camWMATIC" ["cwe"]="camWETH")
@@ -46,7 +53,7 @@ do
     echo
     echo Running $function on $network_id
     echo
-    brownie run scripts/qi_dao_unit.py $function $vault_id --network $network_id
+    brownie run scripts/qi_dao_unit.py $function $acc_id $vault_id --network $network_id
     echo 
     while [ $counter -gt -1 ]
     do
