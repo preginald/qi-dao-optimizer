@@ -47,7 +47,11 @@ class Vault:
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
         self.collateral_value = self.collateral * self.collateral_price
 
-        self.collateral_to_debt_ratio = (self.collateral_value / self.debt) * 100
+        if self.debt > 0:
+            self.collateral_to_debt_ratio = (self.collateral_value / self.debt) * 100
+        else:
+            self.collateral_to_debt_ratio = self.min_debt_ratio * 1.1
+
         self.max_borrow = self.collateral_value / (self.max_debt_ratio / 100)
         self.min_borrow = self.collateral_value / (self.min_debt_ratio / 100)
 
