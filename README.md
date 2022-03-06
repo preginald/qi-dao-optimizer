@@ -2,6 +2,7 @@
 
 ## Prequisites
 
+* Ubuntu (or a Linux distro with bash)
 * python 3.9
 * eth-brownie 1.17.2
 * python3-env
