@@ -21,9 +21,11 @@ network_id = get_network(network.show_active())
 camWMATIC_CONTRACT = config["networks"][network_id]["tokens"]["camWMATIC"]
 camWBTC_CONTRACT = config["networks"][network_id]["tokens"]["camWBTC"]
 camWETH_CONTRACT = config["networks"][network_id]["tokens"]["camWETH"]
+cxDMVT_CONTRACT = config["networks"][network_id]["tokens"]["cxDMVT"]
 MATIC_CONTRACT_ADDRESS = config["networks"][network_id]["matic_usd_price_feed"]
 BTC_CONTRACT_ADDRESS = config["networks"][network_id]["btc_usd_price_feed"]
 ETH_CONTRACT_ADDRESS = config["networks"][network_id]["eth_usd_price_feed"]
+DOGE_CONTRACT_ADDRESS = config["networks"][network_id]["doge_usd_price_feed"]
 
 
 class Vault:
@@ -174,6 +176,20 @@ def camWBTC(vault_id):
     vault_contract = interface.MaiVault(camWBTC_CONTRACT)
     # vault_id = config["networks"][network.show_active()]["camWBTC MAI Vault"]["id"]
     vault = Vault(vault_contract, vault_id)
+
+    if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
+        tx = vault.repay()
+
+    if vault.collateral_to_debt_ratio > vault.min_debt_ratio:  # 180
+        if vault.mai_reserves < 10:
+            print("Not enough MAI to borrow.")
+        else:
+            tx = vault.borrow()
+
+
+def cxDOGE(acc_id, vault_id):
+    vault_contract = interface.MaiVault(cxDMVT_CONTRACT)
+    vault = Vault(vault_contract, acc_id, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
         tx = vault.repay()
