@@ -1,5 +1,23 @@
 ## Qi Dao vault optimizer
 
+The main reason I created this bot is so that I could sleep at night knowing that my vaults are earning the maximum Qi rewards.
+
+## How it works ##
+
+The bot borrows or pays back the loan on your vault automatically based on the underlying collateral price.
+
+The cycle time for the bot is ~ 20 seconds. This means that every 20 seconds the bot performs the following tasks:
+
+* check the collateral token price
+* check if the collateral to debt ratio is within the defined "safe" limit.
+* eg. on the camWMATIC vault, if CDR is < 160% then it will repay MAI to bring it back to over 160% CDR. 
+* Conversely, if CDR is > 170% then it will borrow MAI (if debt ceiling > 10 MAI). 
+
+The bot loop execution is performed by a bash shell script which calls the brownie script instead of running the loop in the python script for improved reliability.
+
+
+
+
 ## Prequisites
 
 * Ubuntu (or a Linux distro with bash)
@@ -10,6 +28,8 @@
 
 
 ## IMPORTANT ##
+Test the bot on a small vault deposit initially until you get a good feel for the way the bot runs.
+
 You must make sure that you have approved the borrow and payback actions for the vault you wish to run this bot on. Failure to do this will result in a ValueError error and the bot will fail. 
 
 
