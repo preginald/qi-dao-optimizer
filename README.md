@@ -8,6 +8,10 @@
 * python3-dev 
 
 
+## IMPORTANT ##
+You must make sure that you have approved the borrow and payback actions for the vault you wish to run this bot on. Failure to do this will result in a ValueError error and the bot will fail. 
+
+
 ## Steps to install
 
 ### Install Python virtual environent
