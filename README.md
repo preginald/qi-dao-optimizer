@@ -15,7 +15,7 @@ The cycle time for the bot is ~ 20 seconds. This means that every 20 seconds the
 
 The bot loop execution is performed by a bash shell script which calls the brownie script instead of running the loop in the python script for improved reliability.
 
-
+![screenshot of the camWMATIC and cxDOGE bots in action](https://ibb.co/Dpcn5jv)
 
 
 ## Prequisites
