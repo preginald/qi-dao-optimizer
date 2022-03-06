@@ -34,6 +34,8 @@ class Vault:
         self.acc_id = acc_id
         self.vault_id = vault_id
 
+        self.acc = get_account(self.acc_id)
+
         self.debt = self.get_debt()
 
         self.max_debt_ratio = config["networks"][network_id][vault.name()][
@@ -77,7 +79,7 @@ class Vault:
         print(f"Min debt ratio: {self.min_debt_ratio}")
 
     def borrow(self):
-        acc = get_account(self.acc_id)
+        # acc = get_account(self.acc_id)
 
         if self.mai_reserves < self.borrow_amount:
             amount = self.mai_reserves - 1
@@ -90,17 +92,17 @@ class Vault:
         else:
             amount_wei = Wei(f"{amount} ether")
             print(f"You are about to borrow {amount} ({amount_wei})")
-            tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": acc})
+            tx = self.vault.borrowToken(self.vault_id, amount_wei, {"from": self.acc})
             tx.wait(5)
             return tx
 
     def repay(self):
-        acc = get_account(self.acc_id)
+        # acc = get_account(self.acc_id)
         amount = self.debt - self.max_borrow
         if amount > 10:
             amount_wei = Web3.toWei(amount, "ether")
             print(f"You are about to repay {amount} ({amount_wei})")
-            tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": acc})
+            tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": self.acc})
             tx.wait(5)
         else:
             print(f"Skipping repay {amount} because amount is less than 10.")
