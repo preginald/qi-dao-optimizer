@@ -122,8 +122,24 @@ def get_account(_filename):
     account = accounts.load(_filename, os.environ["p1"])
     account_balance = account.balance() / 10 ** 18
     print("Account loaded")
-    print("Balance:", account_balance)
+    print("MATIC Balance:", account_balance)
+    print("MAI Balance:", get_mai_balance(account.address))
     return account
+
+
+def get_mai_balance(account_address):
+    url = "https://api.polygonscan.com/api"
+    params = {
+        "module": "account",
+        "action": "tokenbalance",
+        "contractaddress": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+        "address": account_address,
+        "tag": "latest",
+        "apikey": os.environ["POLYGONSCAN_TOKEN"],
+    }
+
+    response = requests.get(url, params)
+    return int(json.loads(response.content)["result"]) / 10 ** 18
 
 
 def get_price_chainlink(contract_address):
