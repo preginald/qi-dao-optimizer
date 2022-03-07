@@ -59,7 +59,7 @@ while :
 do
     counter=5
     echo
-    printf "Running ${LCYAN}${function}${NC} vault ID${YELLOW}${vault_id}${NC} on ${LGREEN}${network_id}${NC}\n"
+    printf "Running ${LCYAN}${function}${NC} vault ${YELLOW}#${vault_id}${NC} on ${LGREEN}${network_id}${NC}\n"
     echo
     brownie run scripts/qi_dao.py $function $acc_id $vault_id --network $network_id
     echo 
