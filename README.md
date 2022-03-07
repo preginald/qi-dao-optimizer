@@ -87,6 +87,20 @@ brownie console --network polygon-main-chainstack
 ```bash
 brownie accounts new <account_id>
 ```
+
+### Set your min and max CDR ratio
+
+Edit the brownie-config.yaml and set the minimum and maximum Collateral to Debt Ratio for the respective vaults.
+
+For example, here are the settings for the camWMATIC vault:
+```yaml
+    camWMATIC MAI Vault: 
+      max_debt_ratio: 160 # change this
+      min_debt_ratio: 170 # and this accordingly.
+      precision: 18
+      price_feed: "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0"
+```
+
 ### How to run the bot
 
 ```bash
