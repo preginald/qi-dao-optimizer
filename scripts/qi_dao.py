@@ -69,13 +69,14 @@ class Vault:
 
     def print_values(self):
         print(f"{self.vault.name()}: ${self.collateral_price}")
-        print(f"Collateral (USD): ${round(self.collateral_value,3)}")
+
         print(f"Collateral: {round(self.collateral,3)} in {self.vault.name()}")
+        print(f"Collateral (USD): ${round(self.collateral_value,3)}")
 
         print(f"Debt ceiling: {round(self.mai_reserves,3)} MAI")
         print(f"Debt: {self.debt} MAI")
-
         print(f"Collateral to debt ratio: {round(self.collateral_to_debt_ratio, 0)}")
+
         print(f"Max debt ratio: {self.max_debt_ratio}")
         print(f"Min debt ratio: {self.min_debt_ratio}")
 
