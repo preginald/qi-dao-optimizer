@@ -18,6 +18,7 @@ def get_network(network_id):
 
 network_id = get_network(network.show_active())
 
+MAI_CONTRACT = config["networks"][network_id]["tokens"]["mai"]
 camWMATIC_CONTRACT = config["networks"][network_id]["tokens"]["camWMATIC"]
 camWBTC_CONTRACT = config["networks"][network_id]["tokens"]["camWBTC"]
 camWETH_CONTRACT = config["networks"][network_id]["tokens"]["camWETH"]
@@ -125,16 +126,17 @@ def get_account(_filename):
     account_balance = account.balance() / 10 ** 18
     print("Account loaded")
     print("MATIC Balance:", account_balance)
-    print("MAI Balance:", get_mai_balance(account.address))
+    print("MAI Balance:", get_token_balance(MAI_CONTRACT, account.address))
+    print("")
     return account
 
 
-def get_mai_balance(account_address):
+def get_token_balance(contract_address, account_address):
     url = "https://api.polygonscan.com/api"
     params = {
         "module": "account",
         "action": "tokenbalance",
-        "contractaddress": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+        "contractaddress": contract_address,
         "address": account_address,
         "tag": "latest",
         "apikey": os.environ["POLYGONSCAN_TOKEN"],
