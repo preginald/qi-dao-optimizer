@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+LCYAN='\033[1;36m'
+LGREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+
+sleep 10
+
 if [[ -z "${p1}" ]]; then
     echo -n "Enter p1: "
     read -s p1
@@ -51,7 +59,7 @@ while :
 do
     counter=5
     echo
-    echo Running $function on $network_id
+    printf "Running ${LCYAN}${function}${NC} vault ID${YELLOW}${vault_id}${NC} on ${LGREEN}${network_id}${NC}\n"
     echo
     brownie run scripts/qi_dao.py $function $acc_id $vault_id --network $network_id
     echo 
