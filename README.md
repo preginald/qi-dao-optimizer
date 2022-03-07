@@ -35,6 +35,12 @@ You must make sure that you have approved the borrow and payback actions for the
 
 ## Steps to install
 
+### Clone the repo
+
+```bash 
+git clone https://github.com/preginald/qi-dao-optimizer.git
+```
+
 ### Install Python virtual environent
 
 ```bash 
