@@ -163,34 +163,6 @@ def camWMATIC(acc_id, vault_id):
             tx = vault.borrow()
 
 
-def camWETH(vault_id):
-    vault_contract = interface.MaiVault(camWETH_CONTRACT)
-    vault = Vault(vault_contract, vault_id)
-
-    if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
-        tx = vault.repay()
-
-    if vault.collateral_to_debt_ratio > vault.min_debt_ratio:  # 180
-        if vault.mai_reserves < 10:
-            print("Not enough MAI to borrow.")
-        else:
-            tx = vault.borrow()
-
-
-def camWBTC(vault_id):
-    vault_contract = interface.MaiVault(camWBTC_CONTRACT)
-    vault = Vault(vault_contract, vault_id)
-
-    if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
-        tx = vault.repay()
-
-    if vault.collateral_to_debt_ratio > vault.min_debt_ratio:  # 180
-        if vault.mai_reserves < 10:
-            print("Not enough MAI to borrow.")
-        else:
-            tx = vault.borrow()
-
-
 def cxDOGE(acc_id, vault_id):
     vault_contract = interface.MaiVault(cxDMVT_CONTRACT)
     vault = Vault(vault_contract, acc_id, vault_id)
