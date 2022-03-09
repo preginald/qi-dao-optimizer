@@ -95,7 +95,7 @@ class Vault:
 
     def repay(self):
         amount = self.debt - self.max_borrow
-        if amount > 10:
+        if amount > self.debt / 100:
             amount_wei = Web3.toWei(amount, "ether")
             print(f"You are about to repay {amount} ({amount_wei})")
             tx = self.vault.payBackToken(self.vault_id, amount_wei, {"from": self.acc})
