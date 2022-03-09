@@ -43,9 +43,8 @@ class Vault:
             "min_debt_ratio"
         ]
         self.precision = 10 ** config["networks"][NETWORK_ID][vault.name()]["precision"]
-        contract_address = config["networks"][NETWORK_ID][vault.name()]["price_feed"]
 
-        self.collateral_price = get_price_chainlink(contract_address)
+        self.collateral_price = self.get_collateral_price()
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
         self.collateral_value = self.collateral * self.collateral_price
 
@@ -112,6 +111,9 @@ class Vault:
     def get_debt(self):
         debt = self.vault.vaultDebt(self.vault_id) / 10 ** 18
         return debt
+
+    def get_collateral_price(self):
+        return self.vault.getEthPriceSource() / 10 ** 8
 
 
 def get_account(_filename):
