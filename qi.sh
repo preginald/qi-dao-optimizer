@@ -51,7 +51,7 @@ else
     network_id=$4
 fi
 
-declare -A functions=( ["cwm"]="camWMATIC" ["cxd"]="cxDOGE" )
+declare -A functions=( ["cwm"]="camWMATIC" ["cxd"]="cxDMVT" )
 
 function=${functions[$vault_asset]}
 
@@ -61,7 +61,7 @@ do
     echo
     printf "Running ${LCYAN}${function}${NC} vault ${YELLOW}#${vault_id}${NC} on ${LGREEN}${network_id}${NC}\n"
     echo
-    brownie run scripts/qi_dao.py $function $acc_id $vault_id --network $network_id
+    brownie run scripts/qi_dao.py main $function $acc_id $vault_id --network $network_id
     echo 
     while [ $counter -gt -1 ]
     do

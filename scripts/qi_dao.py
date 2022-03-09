@@ -16,17 +16,14 @@ def get_network(network_id):
     return network_array[0] + "-" + network_array[1]
 
 
-network_id = get_network(network.show_active())
+NETWORK_ID = get_network(network.show_active())
 
-MAI_CONTRACT = config["networks"][network_id]["tokens"]["mai"]
-camWMATIC_CONTRACT = config["networks"][network_id]["tokens"]["camWMATIC"]
-camWBTC_CONTRACT = config["networks"][network_id]["tokens"]["camWBTC"]
-camWETH_CONTRACT = config["networks"][network_id]["tokens"]["camWETH"]
-cxDMVT_CONTRACT = config["networks"][network_id]["tokens"]["cxDMVT"]
-MATIC_CONTRACT_ADDRESS = config["networks"][network_id]["matic_usd_price_feed"]
-BTC_CONTRACT_ADDRESS = config["networks"][network_id]["btc_usd_price_feed"]
-ETH_CONTRACT_ADDRESS = config["networks"][network_id]["eth_usd_price_feed"]
-DOGE_CONTRACT_ADDRESS = config["networks"][network_id]["doge_usd_price_feed"]
+MAI_CONTRACT = config["networks"][NETWORK_ID]["tokens"]["mai"]
+
+MATIC_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["matic_usd_price_feed"]
+BTC_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["btc_usd_price_feed"]
+ETH_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["eth_usd_price_feed"]
+DOGE_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["doge_usd_price_feed"]
 
 
 class Vault:
@@ -39,14 +36,14 @@ class Vault:
 
         self.debt = self.get_debt()
 
-        self.max_debt_ratio = config["networks"][network_id][vault.name()][
+        self.max_debt_ratio = config["networks"][NETWORK_ID][vault.name()][
             "max_debt_ratio"
         ]
-        self.min_debt_ratio = config["networks"][network_id][vault.name()][
+        self.min_debt_ratio = config["networks"][NETWORK_ID][vault.name()][
             "min_debt_ratio"
         ]
-        self.precision = 10 ** config["networks"][network_id][vault.name()]["precision"]
-        contract_address = config["networks"][network_id][vault.name()]["price_feed"]
+        self.precision = 10 ** config["networks"][NETWORK_ID][vault.name()]["precision"]
+        contract_address = config["networks"][NETWORK_ID][vault.name()]["price_feed"]
 
         self.collateral_price = get_price_chainlink(contract_address)
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
@@ -149,22 +146,9 @@ def get_price_chainlink(contract_address):
     return price
 
 
-def camWMATIC(acc_id, vault_id):
-    vault_contract = interface.MaiVault(camWMATIC_CONTRACT)
-    vault = Vault(vault_contract, acc_id, vault_id)
-
-    if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 160
-        tx = vault.repay()
-
-    if vault.collateral_to_debt_ratio > vault.min_debt_ratio:  # 180
-        if vault.mai_reserves < 10:
-            print("Not enough MAI to borrow.")
-        else:
-            tx = vault.borrow()
-
-
-def cxDOGE(acc_id, vault_id):
-    vault_contract = interface.MaiVault(cxDMVT_CONTRACT)
+def main(vault_contract, acc_id, vault_id):
+    vault_contract_address = config["networks"][NETWORK_ID]["tokens"][vault_contract]
+    vault_contract = interface.MaiVault(vault_contract_address)
     vault = Vault(vault_contract, acc_id, vault_id)
 
     if vault.collateral_to_debt_ratio < vault.max_debt_ratio:  # 150
