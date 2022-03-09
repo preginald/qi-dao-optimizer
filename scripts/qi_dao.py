@@ -65,17 +65,17 @@ class Vault:
         self.print_values()
 
     def print_values(self):
-        print(f"{self.vault.name()}: ${self.collateral_price}")
+        print(f"{self.vault.name()}: ${round(self.collateral_price, 3)}")
 
         print(f"Collateral: {round(self.collateral,3)} in {self.vault.name()}")
-        print(f"Collateral (USD): ${round(self.collateral_value,3)}")
+        print(f"Collateral (USD): ${round(self.collateral_value,2)}")
 
         print(f"Debt ceiling: {round(self.mai_reserves,3)} MAI")
-        print(f"Debt: {self.debt} MAI")
-        print(f"Collateral to debt ratio: {round(self.collateral_to_debt_ratio, 0)}")
+        print(f"Debt: {round(self.debt, 3)} MAI")
+        print(f"Collateral to debt ratio: {round(self.collateral_to_debt_ratio, 2)}%")
 
-        print(f"Max debt ratio: {self.max_debt_ratio}")
-        print(f"Min debt ratio: {self.min_debt_ratio}")
+        print(f"Max debt ratio: {self.max_debt_ratio}%")
+        print(f"Min debt ratio: {self.min_debt_ratio}%")
 
     def borrow(self):
         if self.mai_reserves < self.borrow_amount:
@@ -118,8 +118,8 @@ def get_account(_filename):
     account = accounts.load(_filename, os.environ["p1"])
     account_balance = account.balance() / 10 ** 18
     print("Account loaded")
-    print("MATIC Balance:", account_balance)
-    print("MAI Balance:", get_token_balance(MAI_CONTRACT, account.address))
+    print("MATIC Balance:", round(account_balance, 3))
+    print("MAI Balance:", round(get_token_balance(MAI_CONTRACT, account.address), 3))
     print("")
     return account
 
