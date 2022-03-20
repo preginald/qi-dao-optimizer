@@ -55,6 +55,7 @@ networks:
       camWBTC: "0x7dda5e1a389e0c1892caf55940f5fce6588a9ae0"
       camWETH: "0x11a33631a5b5349af3f165d2b7901a4d67e561ad"
       cxDMVT: "0x7cbf49e4214c7200af986bc4aacf7bc79dd9c19a"
+      vGMVT: "0x1F0aa72b980d65518e88841bA1dA075BD43fa933"
     camWMATIC MAI Vault: 
       max_debt_ratio: 160
       min_debt_ratio: 170
@@ -75,6 +76,10 @@ networks:
       min_debt_ratio: 165
       precision: 18
       price_feed: "0xbaf9327b6564454f4a3364c33efeef032b4b4444"
+    vGHST Mai Vault: 
+      max_debt_ratio: 155
+      min_debt_ratio: 165
+      precision: 8
 wallets:
   from_key: ${PRIVATE_KEY}
   from_mnemonic: ${MNEMONIC}
