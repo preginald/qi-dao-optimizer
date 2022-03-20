@@ -60,26 +60,22 @@ networks:
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0"
     camWETH MAI Vault: 
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 18
-      price_feed: '0xF9680D99D6C9589e2a93a78A04A279e509205945'
     camWBTC MAI Vault: 
       max_debt_ratio: 160
       min_debt_ratio: 170
       precision: 8
-      price_feed: "0xc907E116054Ad103354f2D350FD2514433D57F6f"
     Celsius X Doge MAI Vault: 
       max_debt_ratio: 155
       min_debt_ratio: 165
       precision: 18
-      price_feed: "0xbaf9327b6564454f4a3364c33efeef032b4b4444"
     vGHST Mai Vault: 
       max_debt_ratio: 155
       min_debt_ratio: 165
-      precision: 8
+      precision: 18
 wallets:
   from_key: ${PRIVATE_KEY}
   from_mnemonic: ${MNEMONIC}
