@@ -15,7 +15,7 @@ The cycle time for the bot is ~ 20 seconds. This means that every 20 seconds the
 
 The bot loop execution is performed by a bash shell script which calls the brownie script instead of running the loop in the python script for improved reliability.
 
-![screenshot of the camWMATIC, cxDOGE and vGHST bots in action](https://i.ibb.co/W5Q1Bc7/Qi-Dao-vault-optimizer.png)
+![screenshot of the camWMATIC, cxDOGE, LINK and vGHST bots in action](https://i.ibb.co/h7bGP4J/Qi-Dao-optimizer-bot.png)
 
 
 ## Prequisites
