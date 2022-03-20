@@ -36,13 +36,15 @@ class Vault:
 
         self.debt = self.get_debt()
 
-        self.max_debt_ratio = config["networks"][NETWORK_ID][vault.name()][
+        self.max_debt_ratio = config["networks"][NETWORK_ID][vault.name().strip()][
             "max_debt_ratio"
         ]
-        self.min_debt_ratio = config["networks"][NETWORK_ID][vault.name()][
+        self.min_debt_ratio = config["networks"][NETWORK_ID][vault.name().strip()][
             "min_debt_ratio"
         ]
-        self.precision = 10 ** config["networks"][NETWORK_ID][vault.name()]["precision"]
+        self.precision = (
+            10 ** config["networks"][NETWORK_ID][vault.name().strip()]["precision"]
+        )
 
         self.collateral_price = self.get_collateral_price()
         self.collateral = vault.vaultCollateral(vault_id) / self.precision
