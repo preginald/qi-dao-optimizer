@@ -17,13 +17,7 @@ def get_network(network_id):
 
 
 NETWORK_ID = get_network(network.show_active())
-
 MAI_CONTRACT = config["networks"][NETWORK_ID]["tokens"]["mai"]
-
-MATIC_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["matic_usd_price_feed"]
-BTC_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["btc_usd_price_feed"]
-ETH_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["eth_usd_price_feed"]
-DOGE_CONTRACT_ADDRESS = config["networks"][NETWORK_ID]["doge_usd_price_feed"]
 
 
 class Vault:
@@ -119,24 +113,26 @@ class Vault:
 
 
 def get_account(_filename):
+    native = config["networks"][NETWORK_ID]["native"]
     account = accounts.load(_filename, os.environ["p1"])
     account_balance = account.balance() / 10 ** 18
     print("Account loaded")
-    print("MATIC Balance:", round(account_balance, 3))
+    print(native, "Balance:", round(account_balance, 3))
     print("MAI Balance:", round(get_token_balance(MAI_CONTRACT, account.address), 3))
     print("")
     return account
 
 
 def get_token_balance(contract_address, account_address):
-    url = "https://api.polygonscan.com/api"
+    url = config["networks"][NETWORK_ID]["url"]
+    explorer_token = config["networks"][NETWORK_ID]["env_name"]
     params = {
         "module": "account",
         "action": "tokenbalance",
         "contractaddress": contract_address,
         "address": account_address,
         "tag": "latest",
-        "apikey": os.environ["POLYGONSCAN_TOKEN"],
+        "apikey": os.environ[explorer_token],
     }
 
     response = requests.get(url, params)
