@@ -2,6 +2,20 @@
 
 The main reason I created this bot is so that I could sleep at night knowing that my vaults are earning the maximum Qi rewards.
 
+## Vaults supported
+
+### Polygon
+
+* Compounding Market Aave Market MATIC
+* Chainlink
+* CelsiusX Wrapped Doge
+* Gotchi Vault 
+
+### Fantom
+
+* Fantom
+
+
 ## How it works ##
 
 The bot borrows or pays back the loan on your vault automatically based on the underlying collateral price.
