@@ -144,4 +144,4 @@ eg. To run the bot on the camWMATIC vault with id 1337 on the Alchemy Polygon RP
 ./qi.sh alpha cwm 1337 polygon-main-alchemy
 ```
 
-You'll also be asked to enter P1 which is the password you specified to decrypt your wallet added in step 9 for the respective <account_id>
+You'll also be asked to enter the password you specified to decrypt your wallet added in step 9 for the respective <account_id>
