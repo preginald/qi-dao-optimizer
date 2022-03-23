@@ -35,44 +35,44 @@ You must make sure that you have approved the borrow and payback actions for the
 
 ## Steps to install
 
-### Clone the repo
+### 1. Clone the repo
 
 ```bash 
 git clone https://github.com/preginald/qi-dao-optimizer.git
 ```
 
-### Install Python virtual environent
+### 2. Install Python virtual environent
 
 ```bash 
 python -m venv .venv
 ```
 
-### Activate virtual environment
+### 3. Activate virtual environment
 ```bash
 source .venv/bin/activate
 ```
 
-### Install requirements
+### 4. Install requirements
 ```bash
 pip install -r requirements.txt
 ```
 
-### Check if Brownie is installed
+### 5. Check if Brownie is installed
 ```bash
 brownie --version
 ```
 
-### Add Alchemy RPC for Polygon
+### 6. Add Alchemy RPC for Polygon
 ```bash
 brownie networks add Polygon "polygon-main-alchemy" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Alchemy)" explorer=https://api.polygonscan.com/api
 ```
 
-### Add Chainstack RPC for Polygon
+### 7. Add Chainstack RPC for Polygon
 ```bash
 brownie networks add Polygon "polygon-main-chainstack" host=https://<replace-with-your-credentials> chainid=137 name="Mainnet (Chainstack)" explorer=https://api.polygonscan.com/api
 ```
 
-### Check if RPC was added
+### 8. Check if RPC was added
 
 ```bash
 brownie console --network polygon-main-alchemy
@@ -82,13 +82,18 @@ brownie console --network polygon-main-alchemy
 brownie console --network polygon-main-chainstack
 ```
 
-### Add Brownie account credentials
+### 9. Import your wallet from a Private Key
+
+Brownie provides a way to store wallet via private key. Brownie encryps and stores your wallet [learn more...](https://eth-brownie.readthedocs.io/en/stable/account-management.html#importing-from-a-private-key)
 
 ```bash
 brownie accounts new <account_id>
 ```
+You will be asked to input the private key, and to choose a password. The account will then be available as <account_id>
 
-### Set your min and max CDR ratio
+When you run the bot you'll be asked to enter the password to decrypt the wallet for the <account_id> passed into the command line (see step 12).
+
+### 10. Set your min and max CDR ratio
 
 Edit the brownie-config.yaml and set the minimum and maximum Collateral to Debt Ratio for the respective vaults.
 
@@ -101,7 +106,26 @@ For example, here are the settings for the camWMATIC vault:
       price_feed: "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0"
 ```
 
-### How to run the bot
+### 11. Export environment variables
+
+The bot requires a couple of environment variables to function and they are:
+
+1. [POLYGONSCAN_TOKEN](https://polygonscan.com/apis "Polygonscan API documentation")
+2. [FTMSCAN_TOKEN](https://ftmscan.com/apis "FTMscan API documentation")
+
+Once you've created your API tokens you can add them to your environment variables.
+
+To add POLYGONSCAN_TOKEN:
+```bash
+export POLYGONSCAN_TOKEN=<your-polygonscan-api-token>
+```
+
+To add FTMSCAN_TOKEN:
+```bash
+export FTMSCAN_TOKEN=<your-ftmscan-api-token>
+```
+
+### 12. How to run the bot
 
 ```bash
 ./qi.sh <account_id> <vault> <id> <network>
