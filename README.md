@@ -133,7 +133,7 @@ export FTMSCAN_TOKEN=<your-ftmscan-api-token>
 
 where...
 
-* **account_id** is the brownie account id specified when adding Brownie Account credentials
+* **account_id** is the brownie account id specified when adding Brownie Account credentials in step 9
 * **vault** is the collateral token code, cwm for camWMATIC, cwe for camWETH
 * **id** is vault ID
 * **network** is the brownie network id specified when adding a custom RPC
@@ -143,3 +143,5 @@ eg. To run the bot on the camWMATIC vault with id 1337 on the Alchemy Polygon RP
 ```bash
 ./qi.sh alpha cwm 1337 polygon-main-alchemy
 ```
+
+You'll also be asked to enter P1 which is the password you specified to decrypt your wallet added in step 9 for the respective <account_id>
