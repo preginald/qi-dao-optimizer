@@ -8,13 +8,6 @@ NC='\033[0m' # No Color
 
 sleep 10
 
-if [[ -z "${p1}" ]]; then
-    echo -n "Enter p1: "
-    read -s p1
-    export p1=$p1
-    echo ""
-fi
-
 if [[ -z "${POLYGONSCAN_TOKEN}" ]]; then
     echo -n "Enter Polygonscan API token: "
     read -s api_token 
@@ -27,6 +20,13 @@ if [ -z "$1" ]; then
     read acc_id
 else
     acc_id=$1
+fi
+
+if [[ -z "${p1}" ]]; then
+    echo -n "Enter the password to decrypt account stored as ${1}: "
+    read -s p1
+    export p1=$p1
+    echo ""
 fi
 
 if [[ "$2" =~ ^(cwm|link|cxd|vgm|ftm)$ ]]; then
