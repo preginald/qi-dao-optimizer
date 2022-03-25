@@ -49,10 +49,10 @@ class Vault:
 
         if self.debt > 0:
             self.collateral_to_debt_ratio = (self.collateral_value / self.debt) * 100
-            self.borrow_amount = self.min_borrow
+            self.borrow_amount = self.min_borrow - self.debt
         else:
             self.collateral_to_debt_ratio = self.min_debt_ratio * 1.1
-            self.borrow_amount = self.min_borrow - self.debt
+            self.borrow_amount = self.min_borrow
 
         self.borrow_amount_wei = Wei(f"{self.borrow_amount} ether")
 
