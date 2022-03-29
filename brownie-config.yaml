@@ -66,6 +66,7 @@ networks:
       btc: '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6'
       eth: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
       mai: '0xa3Fa99A148fA48D14Ed51d610c367C61876997F1'
+      camAAVE: '0x578375c3af7d61586c2C3A7BA87d2eEd640EFA40'
       camWMATIC: "0x88d84a85A87ED12B8f098e8953B322fF789fCD1a"
       camWBTC: "0x7dda5e1a389e0c1892caf55940f5fce6588a9ae0"
       camWETH: "0x11a33631a5b5349af3f165d2b7901a4d67e561ad"
@@ -75,6 +76,10 @@ networks:
     camWMATIC MAI Vault: 
       max_debt_ratio: 160
       min_debt_ratio: 170
+      precision: 18
+    camAAVE MAI Vault: 
+      max_debt_ratio: 155
+      min_debt_ratio: 165
       precision: 18
     camWETH MAI Vault: 
       max_debt_ratio: 160

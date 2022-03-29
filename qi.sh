@@ -29,11 +29,11 @@ if [[ -z "${p1}" ]]; then
     echo ""
 fi
 
-if [[ "$2" =~ ^(cwm|link|cxd|vgm|ftm)$ ]]; then
+if [[ "$2" =~ ^(cwm|cav|link|cxd|vgm|ftm)$ ]]; then
     vault_asset=$2
 else
     echo "Select which vault"
-    echo -n "cwm = camWMATIC, link = LMVT, cxd = cxDOGE, vgm = vGMVT, ftm = FTMVT: "
+    echo -n "cwm = camWMATIC, cav = camAAVE, link = LMVT, cxd = cxDOGE, vgm = vGMVT, ftm = FTMVT: "
     read vault_asset
 fi
 
@@ -51,7 +51,7 @@ else
     network_id=$4
 fi
 
-declare -A functions=( ["cwm"]="camWMATIC" ["link"]="LMVT" ["cxd"]="cxDMVT" ["vgm"]="vGMVT" ["ftm"]="FTMVT")
+declare -A functions=( ["cwm"]="camWMATIC" ["cav"]="camAAVE" ["link"]="LMVT" ["cxd"]="cxDMVT" ["vgm"]="vGMVT" ["ftm"]="FTMVT")
 
 function=${functions[$vault_asset]}
 
