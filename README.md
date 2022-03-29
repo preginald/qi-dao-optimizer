@@ -7,6 +7,7 @@ The main reason I created this bot is so that I could sleep at night knowing tha
 ### Polygon
 
 * Compounding Market Aave Market MATIC
+* Compounding Market Aave Market AAVE
 * Chainlink
 * CelsiusX Wrapped Doge
 * Gotchi Vault 
