@@ -78,8 +78,8 @@ networks:
       min_debt_ratio: 170
       precision: 18
     camAAVE MAI Vault: 
-      max_debt_ratio: 155
-      min_debt_ratio: 165
+      max_debt_ratio: 160
+      min_debt_ratio: 170
       precision: 18
     camWETH MAI Vault: 
       max_debt_ratio: 160
